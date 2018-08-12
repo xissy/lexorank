@@ -1,24 +1,30 @@
+// This package is a simple implementation of LexoRank.
+//
+// LexoRank is a ranking system introduced by Atlassian JIRA.
+// For details - https://www.youtube.com/watch?v=OjQv9xMoFbg
 package lexorank
 
-var (
-	MinChar = byte('0')
-	MaxChar = byte('z')
+const (
+	minChar = byte('0')
+	maxChar = byte('z')
 )
 
+// Rank returns a new rank string between prev and next.
+// ok=false if it needs to be reshuffled. e.g. same or adjacent prev, next values.
 func Rank(prev, next string) (string, bool) {
 	if prev == "" {
-		prev = string(MinChar)
+		prev = string(minChar)
 	}
 	if next == "" {
-		next = string(MaxChar)
+		next = string(maxChar)
 	}
 
 	rank := ""
 	i := 0
 
 	for {
-		prevChar := getChar(prev, i, MinChar)
-		nextChar := getChar(next, i, MaxChar)
+		prevChar := getChar(prev, i, minChar)
+		nextChar := getChar(next, i, maxChar)
 
 		if prevChar == nextChar {
 			rank += string(prevChar)

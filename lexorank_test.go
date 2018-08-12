@@ -2,18 +2,9 @@ package lexorank
 
 import (
 	"testing"
-	"os"
 
 	"github.com/stretchr/testify/assert"
 )
-
-func TestMain(m *testing.M) {
-	MinChar = byte('0')
-	MaxChar = byte('z')
-
-	retCode := m.Run()
-	os.Exit(retCode)
-}
 
 func TestSuccessEmptyPrevEmptyNext(t *testing.T) {
 	rank, ok := Rank("", "")
