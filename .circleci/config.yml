@@ -1,18 +1,18 @@
-# Golang CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-go/ for more details
 version: 2
 jobs:
   build:
     docker:
-    - image: circleci/golang:1.12.3
-    working_directory: /go/src/github.com/xissy/lexorank
+      - image: circleci/golang:1.12.3
     steps:
-    - checkout
-    - run:
-        name: Enable go1.12 modules
-        command: |
-          echo 'export GO111MODULE=on' >> $BASH_ENV
-          source $BASH_ENV
-    - run: make lint
-    - run: make test
+      - checkout
+      - run:
+          name: Enable go1.12 modules
+          command: |
+            echo 'export GO111MODULE=on' >> $BASH_ENV
+            source $BASH_ENV
+      - run:
+          name: Test
+          command: make test
+      - run:
+          name: Lint
+          command: make lint
