@@ -5,25 +5,14 @@ version: 2
 jobs:
   build:
     docker:
-    # specify the version
-    - image: circleci/golang:1.10
-
-    # Specify service dependencies here if necessary
-    # CircleCI maintains a library of pre-built images
-    # documented at https://circleci.com/docs/2.0/circleci-images/
-    # - image: circleci/postgres:9.4
-
-    #### TEMPLATE_NOTE: go expects specific checkout path representing url
-    #### expecting it in the form of
-    ####   /go/src/github.com/circleci/go-tool
-    ####   /go/src/bitbucket.org/circleci/go-tool
+    - image: circleci/golang:1.12.3
     working_directory: /go/src/github.com/xissy/lexorank
     steps:
     - checkout
-
-    # specify any bash command here prefixed with `run: `
-    - run: go get github.com/tools/godep
-    - run: dep ensure
-    - run: go test -v -cover ./...
-    - run: go get -u github.com/mgechev/revive
-    - run: revive -exclude vendor/... ./...
+    - run:
+        name: Enable go1.12 modules
+        command: |
+          echo 'export GO111MODULE=on' >> $BASH_ENV
+          source $BASH_ENV
+    - run: make lint
+    - run: make test
