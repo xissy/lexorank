@@ -1,4 +1,7 @@
 # lexorank
+
+[![Go Report Card](https://goreportcard.com/badge/xissy/lexorank)](https://goreportcard.com/report/xissy/lexorank)
+
 > A simple implementation of LexoRank
 
 LexoRank is a ranking system introduced by Atlassian JIRA.
